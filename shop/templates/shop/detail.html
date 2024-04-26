@@ -77,6 +77,54 @@
         input[type="submit"]:hover {
             background-color: #0056b3;
         }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f8f9fa;
+            padding-top: 20px;
+        }
+
+        /* Your existing custom CSS code here */
+
+        /* Add the provided CSS code here */
+        h2 {
+            font-size: 20px;
+            font-weight: bold;
+            color: #343a40;
+            margin-bottom: 10px;
+        }
+
+        form {
+            margin-bottom: 15px;
+        }
+
+        form label {
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        input[type="number"] {
+            padding: 5px;
+            border: 1px solid #ced4da;
+            border-radius: 4px;
+            width: 50px; /* Adjust width as desired */
+            margin-right: 10px;
+        }
+
+        button {
+            background-color: #28a745;
+            color: #ffffff;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
     </style>
 </head>
 <body>
@@ -149,9 +197,16 @@
                         <li class="list-group-item"><strong>Category:</strong> {{ product_object.category }}</li>
                         <li class="list-group-item"><strong>Description:</strong> <br>{{ product_object.description }}</li>
                         <li class="list-group-item">
-                            <strong>Review:</strong> <input type="text" name="text" placeholder="Enter your review">
-                            <br>
-                            <input type="submit" value="Submit Review">
+                        <h2>Rating: {{ product.rating }}</h2>
+                            <form method="post" action="{% url 'rate_product' product_object.id %}">
+                                {% csrf_token %}
+                                <label>
+                                    <input type="number" name="rating" min="1" max="5">
+                                </label>
+                                <button type="submit">Rate</button>
+                            </form>
+                        </li>
+                                <li class="list-group-item"><strong>Average Rating: </strong> <br>{{ product_object.rating }}</li>
                         </li>
                     </ul>
                 </div>
