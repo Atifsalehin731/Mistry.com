@@ -27,3 +27,36 @@ def SignUpPage(request):
 
     return render(request, 'shop/signup.html')
 
+
+def LoginPage(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        pass1 = request.POST.get('pass')
+        print(username, pass1)
+        user = authenticate(request, username=username, password=pass1)
+        if user is not None:
+            login(request, user)
+            return redirect('index')
+        else:
+            return HttpResponse("Username and Password is Incorrect!")
+    return render(request, 'shop/login.html')
+
+
+def LogoutPage(request):
+    logout(request)
+    return redirect('LoginPage')
+def index(request):
+    product_objects = Product.objects.all()
+
+    #search code
+    #code file
+    item_name = request.GET.get('item_name')
+    if item_name != '' and item_name is not None:
+        product_objects = product_objects.filter(category__icontains=item_name)
+
+    # paginator code
+    paginator = Paginator(product_objects, 8)
+    page = request.GET.get("page")
+    product_objects = paginator.get_page(page)
+
+    return render(request, 'shop/index.html', {'product_objects': product_objects})
