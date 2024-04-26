@@ -42,15 +42,17 @@ def LoginPage(request):
             return HttpResponse("Username and Password is Incorrect!")
     return render(request, 'shop/login.html')
 
-
+# View function for logging out
 def LogoutPage(request):
     logout(request)
     return redirect('LoginPage')
 
-
+# View function for the index page
 def index(request):
+    # Retrieve all products
     product_objects = Product.objects.all()
 
+    # Search functionality
     # search code
     # code file
     item_name = request.GET.get('item_name')
