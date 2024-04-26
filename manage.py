@@ -20,3 +20,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+"""
+Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+type and scrambled it to make a type specimen book. 
+""
