@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 
 
 # Create your views here.
+# View function for the sign-up page
 def SignUpPage(request):
     if request.method == 'POST':
         uname = request.POST.get('username')
@@ -27,7 +28,7 @@ def SignUpPage(request):
 
     return render(request, 'shop/signup.html')
 
-
+# View function for the login page
 def LoginPage(request):
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -124,3 +125,8 @@ def rate_product(request, id):
 
     # If the request is not POST, redirect to the detail page
     return redirect(reverse('detail', args=[id]))
+
+
+"""
+
+"""
